@@ -1,0 +1,75 @@
+*{
+    padding: 0px;
+    margin: 0px;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: url(Jedes\ Wetter.png) no-repeat center center fixed #000;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.app-main {
+    opacity: .9;
+    background-color: dimgrey;
+    max-width: 500px;
+    margin: auto;
+    text-align: center;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin-top: 300px;
+}
+
+#city-input {
+    background-color:  darkgray;
+    width: 440px;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    
+}
+
+#weather-output {
+    margin-bottom: 15px;
+    margin-left: 25px;
+    width: 450px;
+    height: 150px;
+    background-color: gray;
+    color: white;
+    padding-top: 10px;
+    border-radius: 5px;
+}
+
+.APP{
+    text-decoration: underline;
+}
+
+.city{
+    text-decoration: underline;
+    color: darkblue;
+    font-family: monospace;
+}
+
+#temp{
+    padding: 10px;
+}
+
+.location-details{
+    margin: 10px;
+
+}
+
+@media (max-width: 600px) {
+    .app-main {
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    .input-box {
+        padding: 8px;
+    }
+}

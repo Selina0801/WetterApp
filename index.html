@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+
+    <script>
+
+    function fetchWeather() {
+        const city = document.getElementById('city-input').value;
+        const apiKey = 'bab281d79e5f1e9755a68d754cc313e7'; // API-Schlüssel hier einfügen
+        const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=de`;
+
+        fetch(apiUrl)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Netzwerkantwort war nicht ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                displayWeather(data);
+            })
+            .catch(error => console.error('Fehler:', error));
+    }
+
+    function displayWeather(data) {
+        const weatherOutput = document.getElementById('weather-output');
+
+        if (data && data.weather && data.main) {
+ 
+            weatherOutput.innerHTML = `
+                <h2 class="city" >Wetter in ${data.name}</h2>
+                <p class="temp" >Temperatur: ${data.main.temp} °C</p>
+                <p class="Min-Max" >Min: ${data.main.temp_min} °C / Max: ${data.main.temp_max} °C</p>
+                <p class="Angaben" >Beschreibung: ${data.weather[0].description}</p>
+            `;
+
+        } else {
+            weatherOutput.innerHTML = `<p>Stadt nicht gefunden.</p>`;
+        }
+        
+
+        const iconCode = data.weather[0].icon;
+        const iconURL = `https://openweathermap.org/img/wn/${iconCode}.png`;
+        const weatherIcon = document.getElementById('weather-icon');
+
+        if(iconCode == '01d' || iconCode == '01n'){
+            document.body.style.backgroundImage = "url('Wetter Bilder/Klarer Himmel.jpg')";
+            document.body.style.backgroundSize = "cover";
+            document.body.style.backgroundAttachment = "fixed";
+            document.body.style.backgroundPosition = "center";
+            document.body.style.transition = '.2s';
+        }
+
+        else if(iconCode == '02d' || iconCode == '02n'){
+            document.body.style.backgroundImage = "url('Wetter Bilder/few clouds.jpg')";
+            document.body.style.backgroundSize = "cover";
+            document.body.style.backgroundAttachment = "fixed";
+            document.body.style.backgroundPosition = "center";
+            document.body.style.transition = '.2s';
+        }
+
+        else if(iconCode == '03d' || iconCode == '03n'){
+            document.body.style.backgroundImage = "url('Wetter Bilder/scattered broken clouds.jpg')";
+            document.body.style.backgroundSize = "cover";
+            document.body.style.backgroundAttachment = "fixed";
+            document.body.style.backgroundPosition = "center";
+            document.body.style.transition = '.2s';
+        }
+        
+        else if(iconCode == '04d' || iconCode == '04n'){
+            document.body.style.backgroundImage = "url('Wetter Bilder/Bedeckt.jpg')";
+            document.body.style.backgroundSize = "cover";
+            document.body.style.backgroundAttachment = "fixed";
+            document.body.style.backgroundPosition = "center";
+            document.body.style.transition = '.2s';
+        }
+
+        else if(iconCode == '09d' || iconCode == '09n'){
+            document.body.style.backgroundImage = "url('Wetter Bilder/shower rain.jpg')";
+            document.body.style.backgroundSize = "cover";
+            document.body.style.backgroundAttachment = "fixed";
+            document.body.style.backgroundPosition = "center";
+            document.body.style.transition = '.2s';
+        }
+
+        else if(iconCode == '10d' || iconCode == '10n'){
+            document.body.style.backgroundImage = "url('Wetter Bilder/Regen.jpg')";
+            document.body.style.backgroundSize = "cover";
+            document.body.style.backgroundAttachment = "fixed";
+            document.body.style.backgroundPosition = "center";
+            document.body.style.transition = '.2s';
+        }
+
+        else if(iconCode == '11d' || iconCode == '11n'){
+            document.body.style.backgroundImage = "url('Wetter Bilder/Gewitter.png')";
+            document.body.style.backgroundSize = "cover";
+            document.body.style.backgroundAttachment = "fixed";
+            document.body.style.backgroundPosition = "center";
+            document.body.style.transition = '.2s';
+        }
+
+        else if(iconCode == '13d' || iconCode == '13n'){
+            document.body.style.backgroundImage = "url('Wetter Bilder/Schnee.png')";
+            document.body.style.backgroundSize = "cover";
+            document.body.style.backgroundAttachment = "fixed";
+            document.body.style.backgroundPosition = "center";
+            document.body.style.transition = '.2s';
+        }
+
+        else if(iconCode == '50d' || iconCode == '50n'){
+            document.body.style.backgroundImage = "url('Wetter Bilder/Trüb.png')";
+            document.body.style.backgroundSize = "cover";
+            document.body.style.backgroundAttachment = "fixed";
+            document.body.style.backgroundPosition = "center";
+            document.body.style.transition = '.2s';
+        }
+
+        else{
+            document.body.style.backgroundImage = "url('Jedes Wetter.png')";
+            document.body.style.backgroundSize = "cover";
+            document.body.style.backgroundAttachment = "fixed";
+            document.body.style.backgroundPosition = "center";
+            document.body.style.transition = '.2s';
+        }
+
+
+    }
+
+    function handleEnter(event) {
+    // Prüfen, ob die Enter-Taste (Keycode 13) gedrückt wurde
+        if (event.key === 'Enter') {
+            fetchWeather();
+        }
+    }
+
+ 
+    </script>
+
+
+    <title>WetterAPP</title>
+</head>
+
+<body>
+
+        <div class="app-main">
+
+            <input type="text" id="city-input" placeholder="Stadt" onkeydown="handleEnter(event)">    
+
+            <div id="weather-output">
+
+                <div class="APP">Die Wetter-App
+                </div>
+
+                <div class="satz">immer und überall Top infortmiert!
+                </div>
+
+                <div class="city" id="city">
+                </div>
+
+                <div class="temp" id="temp">
+                </div>
+
+                <div class="Min-Max" id="Min-Max">
+                </div>
+
+                <div class="Angaben" id="Angaben">
+                </div>
+
+            </div>
+        </div>
+
+
+    
+</body>
+</html>
